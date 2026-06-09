@@ -48,7 +48,7 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const files = await getMdFiles('JS');
+  const files = await getMdFiles();
   return {
     props: {
       allPostsData: files,

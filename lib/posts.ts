@@ -113,49 +113,41 @@ export async function githubRawFetch(url: string) {
 }
 
 // 获取指定目录下的所有 .md 文件的信息
-export async function getMdFiles(path: string = ''): Promise<{
-  id: string;
-  title: string;
-  date: string;
-  download_url: string;
-}[]> {
-  const formatPath = path.startsWith('/') || path === '' ? path : ('/' + path);
+export async function getMdFiles(path: string = ""): Promise<
+  {
+    id: string;
+    title: string;
+    date: string;
+    download_url: string;
+  }[]
+> {
+  const formatPath = path.startsWith("/") || path === "" ? path : "/" + path;
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents${formatPath}?ref=${BRANCH}`;
   const files = await githubApiFetch(url);
 
   // 过滤出 .md 文件，并封装基本信息对象
   const posts = files
-    .filter((file: any) => file.type === 'file' && file.name.endsWith('.md'))
+    .filter((file: any) => file.type === "file" && file.name.endsWith(".md"))
     .map((file: any) => ({
-      id: githubPathToId(file.path ?? ''),
+      id: githubPathToId(file.path), // 不能包含【/】，不能包含【.】，或其他特殊的字符
       title: file.name,
       date: lastModifyDate(),
-      download_url: file.download_url || '',
-  }));
+      download_url: file.download_url || "", // 暂时没用到
+    }));
 
   return posts;
 }
 
-// 根据download_url获取单篇md文档的内容
-export async function getPostData(mdInfo: {
-  id: string;
-  title: string;
-  date: string;
-  download_url: string;
-}) {
-  const postData = await githubRawFetch(mdInfo.download_url);
+// 根据github仓库中的文件路径（开头不要加/）获取单篇md文档的内容
+export async function getPostData(filePath: string) {
+  const url = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${filePath}`;
+  const postData = await githubRawFetch(url);
 
   const matterResult = matter(postData);
 
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content);
-  const contentHtml = processedContent.toString();
 
-  return {
-    id: mdInfo.id,
-    contentHtml,
-    title: mdInfo.title,
-    date: mdInfo.date,
-  };
+  return processedContent.toString();
 }
