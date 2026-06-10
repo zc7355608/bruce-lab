@@ -128,7 +128,7 @@ export async function getMdFiles(path: string = ""): Promise<
 
 /**
  * 获取github仓库中的文件树
- * @returns 
+ * @returns
  */
 export async function getBlogsRepoTree(): Promise<RepoTreeItem[]> {
   // 使用 Git Trees API 获取 blogs 仓库的文件树 (recursive=1 表示递归获取所有子目录)

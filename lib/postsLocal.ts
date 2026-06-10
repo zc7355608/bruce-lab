@@ -39,7 +39,6 @@ export async function getPostData(relativePath: string) {
   const postData = await fs.readFile(fullPath, "utf-8");
 
   const matterResult = matter(postData);
-  console.log(matterResult);
 
   const processedContent = await remark()
     .use(html)
