@@ -1,10 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
 /**
  * 1、API Routes允许您在Next.js应用内创建API端点。您可以通过在`pages/api`目录内创建具有以下格式的函数来实现此目的：
  */
 export default (_: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ text: 'Hello' });
+  res.status(200).json({ text: "Hello" });
 };
 
 // 2、它们可以部署为无服务器函数（Serverless Functions也称为Lambda）。
