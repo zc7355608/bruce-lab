@@ -5,7 +5,7 @@ import Layout from "../../components/layout/index";
 import Date from "../../components/date";
 
 import utilStyles from "../../styles/utils.module.css";
-import { getBlogsRepoTree, getPostData } from "../../lib/posts";
+import { getBlogsPath, getPostData } from "../../lib/postsLocal";
 import { MD_SUFFIX } from "../../lib/constant";
 import { lastModifyDate, deleteFileExtension } from "../../lib/common";
 
@@ -37,11 +37,11 @@ export default function Post({
 
 // 该函数执行时机与getStaticProps类似的，并且一定是先执行的。它是为动态路由页面（如 [id].tsx）设计的。它的主要作用是告诉 Next.js 需要预渲染哪些路径。
 export const getStaticPaths: GetStaticPaths = async () => {
-  const blogTree = await getBlogsRepoTree();
+  const blogTree = await getBlogsPath();
   const allPostsData = blogTree.map((item) => ({
-    id: deleteFileExtension(item.path),
-    title: item.path,
-    date: lastModifyDate(),
+    id: deleteFileExtension(item),
+    title: item,
+    date: lastModifyDate(), // todo: 日期改为git的最近修改时间
   }));
 
   return {
@@ -61,14 +61,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
  */
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = (params!.slug as string[]).join("/"); // 将路径数组重新拼接成字符串形式，以获取正确的文件路径
-  const contentHtml = await getPostData(id + MD_SUFFIX); // 需要加上.md后缀才能正确获取到文件内容
+  const { contentHtml } = await getPostData(id + MD_SUFFIX); // 需要加上.md后缀才能正确获取到文件内容
   return {
     props: {
       postData: {
         id,
-        contentHtml,
         title: id + MD_SUFFIX,
-        date: lastModifyDate(), // todo: 日期改为github中的最近修改时间
+        date: lastModifyDate(), // todo: 日期改为git的最近修改时间
+        contentHtml,
       },
     },
   };

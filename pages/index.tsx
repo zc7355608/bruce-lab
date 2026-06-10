@@ -7,7 +7,7 @@ import Date from "../components/date";
 
 import utilStyles from "../styles/utils.module.css";
 import { siteConfig } from "../lib/site-config";
-import { getBlogsRepoTree } from "../lib/posts";
+import { getBlogsPath } from "../lib/postsLocal";
 import { lastModifyDate, deleteFileExtension } from "../lib/common";
 
 export default function Home({
@@ -53,11 +53,11 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const blogTree = await getBlogsRepoTree();
+  const blogTree = await getBlogsPath();
   const allPostsData = blogTree.map((item) => ({
-    id: deleteFileExtension(item.path),
-    title: item.path,
-    date: lastModifyDate(), // todo: 日期改为github中的最近修改时间
+    id: deleteFileExtension(item),
+    title: item,
+    date: lastModifyDate(), // todo: 日期改为git的最近修改时间
   }));
 
   return {
