@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "date-fns": "^2.29.3",
+    "github-markdown-css": "^5.9.0",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "react": "latest",
