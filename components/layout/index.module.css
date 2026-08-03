@@ -1,15 +1,71 @@
 .container {
-  max-width: 36rem;
-  padding: 0 1rem;
+  max-width: 48rem;
+  padding: 2rem 2.5rem;
   margin: 3rem auto 6rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.bio {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  padding-left: 0.75rem;
+  border-left: 4px solid #0070f3;
+}
+
+.postListScroll {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.postListScroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.postListScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.postListScroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.postListScroll::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
 }
 
 .backToHome {
-  margin: 3rem 0 0;
+  display: inline-block;
+  margin: 2rem 0 0;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.backToHome:hover {
+  background: #f0f0f0;
+  text-decoration: none;
 }

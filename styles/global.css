@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -18,6 +21,8 @@ body {
     sans-serif;
   line-height: 1.6;
   font-size: 18px;
+  background: #f0f2f5;
+  color: #1a1a2e;
 }
 
 * {

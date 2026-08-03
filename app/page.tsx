@@ -31,29 +31,27 @@ export default async function Home() {
         <h1 className={utilStyles.heading2Xl}>Bruce Wayne</h1>
       </header>
       <main>
-        <section className={utilStyles.headingMd}>
-          <p>
-            你好，我是一名前端开发者。
-            <br />
-            这里记录前端开发中的学习笔记与踩坑经历。对于想了解、学习前端技术的人，希望它们能帮到你。
-            <br />
-            网站灵感来源于 Next.js 中文官网的入门项目，内容存放在 GitHub
-            中，随着提交而重新触发页面的构建与部署，以此来保证持续更新。
-          </p>
-        </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <h2 className={utilStyles.headingLg}>我的笔记</h2>
-          <ul className={utilStyles.list}>
-            {allPostsData.map(({ id, date, title }) => (
-              <li className={utilStyles.listItem} key={id}>
-                <Link href={`/posts/${id}`}>{title}</Link>
-                <br />
-                <small className={utilStyles.lightText}>
-                  <Date dateString={date} />
-                </small>
-              </li>
-            ))}
-          </ul>
+        <div className={styles.bio}>
+          你好，我是一名前端开发者。这里记录前端开发中的学习笔记与踩坑经历。对于想了解、学习前端技术的人，希望它们能帮到你。
+          <br />
+          网站灵感来源于 Next.js 中文官网的入门项目，内容存放在 GitHub
+          中，随着提交而重新触发页面的构建与部署，以此来保证持续更新。
+        </div>
+        <section>
+          <h2 className={styles.sectionTitle}>我的笔记</h2>
+          <div className={styles.postListScroll}>
+            <ul className={utilStyles.list}>
+              {allPostsData.map(({ id, date, title }) => (
+                <li className={utilStyles.listItem} key={id}>
+                  <Link href={`/posts/${id}`}>{title}</Link>
+                  <br />
+                  <small className={utilStyles.lightText}>
+                    <Date dateString={date} />
+                  </small>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       </main>
     </div>
