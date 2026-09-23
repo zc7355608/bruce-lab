@@ -19,6 +19,9 @@
 .DS_Store
 .env*
 
+# Blog images (generated from content during build)
+/public/images/blog/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

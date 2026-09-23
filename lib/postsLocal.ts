@@ -5,6 +5,7 @@ import { remark } from "remark";
 import html from "remark-html";
 
 import { MD_SUFFIX } from "./constant";
+import { remarkCopyImg } from "./remark-plugin-img";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
@@ -41,6 +42,11 @@ export async function getPostData(relativePath: string) {
   const matterResult = matter(postData);
 
   const processedContent = await remark()
+    .use(remarkCopyImg, {
+      publicDir: path.join(process.cwd(), 'public'),
+      outputDir: '/images/blog',
+      mdFilePath: fullPath
+    })
     .use(html)
     .process(matterResult.content);
 
