@@ -1,0 +1,80 @@
+.tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dirNode,
+.fileNode {
+  margin: 0;
+  padding: 0;
+}
+
+.dirButton {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #333;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.dirButton:hover {
+  background: #f0f4ff;
+}
+
+.arrow {
+  display: inline-block;
+  width: 1rem;
+  font-size: 0.65rem;
+  color: #888;
+  transition: transform 0.2s ease;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.arrowExpanded {
+  transform: rotate(90deg);
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.dirName {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.fileLink {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.5rem;
+  padding-left: calc(0.5rem + 1rem); /* 对齐目录名，补偿箭头宽度 */
+  text-decoration: none;
+  color: #444;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.fileLink:hover {
+  background: #f0f4ff;
+  color: #0070f3;
+}
+
+.fileName {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

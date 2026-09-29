@@ -1,21 +1,14 @@
-import Link from "next/link";
 import Image from "next/image";
 
-import Date from "../components/date";
 import styles from "../components/layout/index.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-import { siteConfig } from "../lib/site-config";
-import { getBlogsPath } from "../lib/postsLocal";
-import { lastModifyDate, deleteFileExtension } from "../lib/common";
+import { getBlogsPath, buildFileTree } from "../lib/postsLocal";
+import FileTree from "../components/FileTree";
 
 export default async function Home() {
-  const blogTree = await getBlogsPath();
-  const allPostsData = blogTree.map((item) => ({
-    id: deleteFileExtension(item),
-    title: item,
-    date: lastModifyDate(),
-  }));
+  const blogPaths = await getBlogsPath();
+  const fileTree = buildFileTree(blogPaths);
 
   return (
     <div className={styles.container}>
@@ -40,17 +33,7 @@ export default async function Home() {
         <section>
           <h2 className={styles.sectionTitle}>我的笔记</h2>
           <div className={styles.postListScroll}>
-            <ul className={utilStyles.list}>
-              {allPostsData.map(({ id, date, title }) => (
-                <li className={utilStyles.listItem} key={id}>
-                  <Link href={`/posts/${id}`}>{title}</Link>
-                  <br />
-                  <small className={utilStyles.lightText}>
-                    <Date dateString={date} />
-                  </small>
-                </li>
-              ))}
-            </ul>
+            <FileTree nodes={fileTree} />
           </div>
         </section>
       </main>
